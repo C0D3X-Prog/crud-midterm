@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+
+        <h1>Item Management System</h1>
+
+        <!-- Add / Edit Form -->
+        <section class="form-section">
+            <h2 id="form-title">Add Item</h2>
+
+            <form id="item-form">
+
+                <input type="hidden" id="item-id">
+
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter item name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input
+                        type="text"
+                        id="description"
+                        placeholder="Enter item description"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input
+                        type="number"
+                        id="quantity"
+                        placeholder="Enter quantity"
+                        min="0"
+                        required
+                    >
+                </div>
+
+                <button type="submit" id="submit-button">
+                    Add Item
+                </button>
+
+                <button type="button" id="cancel-button" class="cancel-button">
+                    Cancel
+                </button>
+
+            </form>
+        </section>
+
+        <!-- Items Table -->
+        <section class="table-section">
+            <h2>Items</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Item Name</th>
+                        <th>Description</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="items-table-body">
+                    <!-- Items will be inserted here -->
+                </tbody>
+            </table>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
