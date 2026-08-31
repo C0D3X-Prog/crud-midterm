@@ -10,13 +10,9 @@ const cancelButton = document.getElementById("cancel-button");
 
 const tableBody = document.getElementById("items-table-body");
 
-// Load items when the page opens
 loadItems();
 
 
-// =========================
-// READ - Load all items
-// =========================
 async function loadItems() {
     try {
         const response = await fetch("/api/items");
@@ -59,9 +55,7 @@ async function loadItems() {
 }
 
 
-// =========================
-// CREATE / UPDATE
-// =========================
+
 form.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -77,7 +71,7 @@ form.addEventListener("submit", async (event) => {
         let response;
 
         if (id) {
-            // UPDATE
+     
             response = await fetch(`/api/items/${id}`, {
                 method: "PUT",
                 headers: {
@@ -86,7 +80,7 @@ form.addEventListener("submit", async (event) => {
                 body: JSON.stringify(item)
             });
         } else {
-            // CREATE
+      
             response = await fetch("/api/items", {
                 method: "POST",
                 headers: {
@@ -112,9 +106,6 @@ form.addEventListener("submit", async (event) => {
 });
 
 
-// =========================
-// EDIT
-// =========================
 function editItem(item) {
     itemIdInput.value = item.id;
     nameInput.value = item.name;
@@ -132,9 +123,6 @@ function editItem(item) {
 }
 
 
-// =========================
-// DELETE
-// =========================
 async function deleteItem(id) {
     const confirmed = confirm(
         "Are you sure you want to delete this item?"
@@ -164,17 +152,13 @@ async function deleteItem(id) {
 }
 
 
-// =========================
-// CANCEL EDIT
-// =========================
+
 cancelButton.addEventListener("click", () => {
     resetForm();
 });
 
 
-// =========================
-// RESET FORM
-// =========================
+
 function resetForm() {
     form.reset();
     itemIdInput.value = "";
@@ -185,9 +169,6 @@ function resetForm() {
 }
 
 
-// =========================
-// Basic HTML escaping
-// =========================
 function escapeHtml(value) {
     return String(value)
         .replaceAll("&", "&amp;")

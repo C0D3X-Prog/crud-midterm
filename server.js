@@ -5,7 +5,6 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// MySQL connection pool
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -14,13 +13,9 @@ const db = mysql.createPool({
     port: process.env.DB_PORT
 });
 
-// Middleware
 app.use(express.json());
 app.use(express.static("public"));
 
-// =========================
-// READ - Get all items
-// =========================
 app.get("/api/items", async (req, res) => {
     try {
         const [rows] = await db.query(
@@ -36,9 +31,7 @@ app.get("/api/items", async (req, res) => {
     }
 });
 
-// =========================
-// CREATE - Add an item
-// =========================
+
 app.post("/api/items", async (req, res) => {
     try {
         const { name, description, quantity } = req.body;
@@ -70,9 +63,7 @@ app.post("/api/items", async (req, res) => {
     }
 });
 
-// =========================
-// UPDATE - Edit an item
-// =========================
+
 app.put("/api/items/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -112,9 +103,7 @@ app.put("/api/items/:id", async (req, res) => {
     }
 });
 
-// =========================
-// DELETE - Delete an item
-// =========================
+
 app.delete("/api/items/:id", async (req, res) => {
     try {
         const { id } = req.params;
@@ -142,9 +131,7 @@ app.delete("/api/items/:id", async (req, res) => {
     }
 });
 
-// =========================
-// Start server
-// =========================
+
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
 });
