@@ -5,6 +5,7 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+
 const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
@@ -13,8 +14,10 @@ const db = mysql.createPool({
     port: process.env.DB_PORT
 });
 
+
 app.use(express.json());
 app.use(express.static("public"));
+
 
 app.get("/api/items", async (req, res) => {
     try {
@@ -32,20 +35,21 @@ app.get("/api/items", async (req, res) => {
 });
 
 
+
 app.post("/api/items", async (req, res) => {
     try {
-        const { name, description, quantity } = req.body;
+        const { item_name, description, quantity } = req.body;
 
-        if (!name || quantity === undefined) {
+        if (!item_name || quantity === undefined) {
             return res.status(400).json({
-                error: "Name and quantity are required"
+                error: "Item name and quantity are required"
             });
         }
 
         const [result] = await db.query(
-            `INSERT INTO items (name, description, quantity)
+            `INSERT INTO items (item_name, description, quantity)
              VALUES (?, ?, ?)`,
-            [name, description || null, quantity]
+            [item_name, description || null, quantity]
         );
 
         const [rows] = await db.query(
@@ -64,22 +68,23 @@ app.post("/api/items", async (req, res) => {
 });
 
 
+
 app.put("/api/items/:id", async (req, res) => {
     try {
         const { id } = req.params;
-        const { name, description, quantity } = req.body;
+        const { item_name, description, quantity } = req.body;
 
-        if (!name || quantity === undefined) {
+        if (!item_name || quantity === undefined) {
             return res.status(400).json({
-                error: "Name and quantity are required"
+                error: "Item name and quantity are required"
             });
         }
 
         const [result] = await db.query(
             `UPDATE items
-             SET name = ?, description = ?, quantity = ?
+             SET item_name = ?, description = ?, quantity = ?
              WHERE id = ?`,
-            [name, description || null, quantity, id]
+            [item_name, description || null, quantity, id]
         );
 
         if (result.affectedRows === 0) {

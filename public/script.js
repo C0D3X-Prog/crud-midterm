@@ -25,7 +25,7 @@ async function loadItems() {
 
             row.innerHTML = `
                 <td>${item.id}</td>
-                <td>${escapeHtml(item.name)}</td>
+                <td>${escapeHtml(item.item_name)}</td>
                 <td>${escapeHtml(item.description || "")}</td>
                 <td>${item.quantity}</td>
                 <td>
@@ -62,10 +62,10 @@ form.addEventListener("submit", async (event) => {
     const id = itemIdInput.value;
 
     const item = {
-        name: nameInput.value.trim(),
+        item_name: nameInput.value.trim(),
         description: descriptionInput.value.trim(),
         quantity: Number(quantityInput.value)
-    };
+ };
 
     try {
         let response;
@@ -108,7 +108,7 @@ form.addEventListener("submit", async (event) => {
 
 function editItem(item) {
     itemIdInput.value = item.id;
-    nameInput.value = item.name;
+    nameInput.value = item.item_name;
     descriptionInput.value = item.description || "";
     quantityInput.value = item.quantity;
 
